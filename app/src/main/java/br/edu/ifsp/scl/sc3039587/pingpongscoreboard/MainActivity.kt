@@ -14,6 +14,8 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -36,7 +38,10 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun PingPongScoreBoardScreen( modifier: Modifier = Modifier, viewModel: PingPongViewModel = viewModel()) {
+fun PingPongScoreBoardScreen(modifier: Modifier = Modifier, viewModel: PingPongViewModel = viewModel()) {
+    val scoreA by viewModel.scoreA.collectAsState()
+    val scoreB by viewModel.scoreB.collectAsState()
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -55,7 +60,7 @@ fun PingPongScoreBoardScreen( modifier: Modifier = Modifier, viewModel: PingPong
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 Text(text = "Jogador A")
-                Text(text = viewModel.scoreA.toString())
+                Text(text = scoreA.toString())
                 Button(onClick = { viewModel.incrementScoreA() }) {
                     Text("+1")
                 }
@@ -66,7 +71,7 @@ fun PingPongScoreBoardScreen( modifier: Modifier = Modifier, viewModel: PingPong
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 Text(text = "Jogador B")
-                Text(text = viewModel.scoreB.toString())
+                Text(text = scoreB.toString())
                 Button(onClick = { viewModel.incrementScoreB() }) {
                     Text("+1")
                 }

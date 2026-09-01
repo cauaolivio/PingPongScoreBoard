@@ -12,5 +12,5 @@ O objetivo é implementar a mesma aplicação em 4 etapas, usando uma abordagem 
 |---|---|---|
 | `remember` | Não sobrevive | Não sobrevive |
 | `ViewModel` + `mutableStateOf` | Sobrevive | Não sobrevive |
-| `ViewModel` + `StateFlow` | | |
+| `ViewModel` + `StateFlow` | Sobrevive | Não sobrevive |
 | `ViewModel` + `SavedStateHandle` | | |

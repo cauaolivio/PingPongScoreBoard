@@ -1,27 +1,27 @@
 package br.edu.ifsp.scl.sc3039587.pingpongscoreboard
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 
 class PingPongViewModel : ViewModel() {
-    var scoreA by mutableIntStateOf(0)
-        private set
+    private val _scoreA = MutableStateFlow(0)
+    val scoreA: StateFlow<Int> = _scoreA.asStateFlow()
 
-    var scoreB by mutableIntStateOf(0)
-        private set
+    private val _scoreB = MutableStateFlow(0)
+    val scoreB: StateFlow<Int> = _scoreB.asStateFlow()
 
     fun incrementScoreA() {
-        scoreA++
+        _scoreA.value++
     }
 
     fun incrementScoreB() {
-        scoreB++
+        _scoreB.value++
     }
 
     fun resetMatch() {
-        scoreA = 0
-        scoreB = 0
+        _scoreA.value = 0
+        _scoreB.value = 0
     }
 }
