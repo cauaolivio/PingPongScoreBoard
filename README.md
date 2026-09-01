@@ -11,6 +11,6 @@ O objetivo é implementar a mesma aplicação em 4 etapas, usando uma abordagem 
 | Abordagem | Rotação de tela | Morte do processo |
 |---|---|---|
 | `remember` | Não sobrevive | Não sobrevive |
-| `ViewModel` + `mutableStateOf` | | |
+| `ViewModel` + `mutableStateOf` | Sobrevive | Não sobrevive |
 | `ViewModel` + `StateFlow` | | |
 | `ViewModel` + `SavedStateHandle` | | |

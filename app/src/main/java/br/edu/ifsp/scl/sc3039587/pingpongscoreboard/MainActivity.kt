@@ -14,14 +14,11 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import br.edu.ifsp.scl.sc3039587.pingpongscoreboard.ui.theme.PingPongScoreBoardTheme
 
 class MainActivity : ComponentActivity() {
@@ -39,10 +36,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun PingPongScoreBoardScreen(modifier: Modifier = Modifier) {
-    var scoreA by remember { mutableIntStateOf(0) }
-    var scoreB by remember { mutableIntStateOf(0) }
-
+fun PingPongScoreBoardScreen( modifier: Modifier = Modifier, viewModel: PingPongViewModel = viewModel()) {
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -61,8 +55,8 @@ fun PingPongScoreBoardScreen(modifier: Modifier = Modifier) {
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 Text(text = "Jogador A")
-                Text(text = scoreA.toString())
-                Button(onClick = { scoreA++ }) {
+                Text(text = viewModel.scoreA.toString())
+                Button(onClick = { viewModel.incrementScoreA() }) {
                     Text("+1")
                 }
             }
@@ -72,17 +66,14 @@ fun PingPongScoreBoardScreen(modifier: Modifier = Modifier) {
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 Text(text = "Jogador B")
-                Text(text = scoreB.toString())
-                Button(onClick = { scoreB++ }) {
+                Text(text = viewModel.scoreB.toString())
+                Button(onClick = { viewModel.incrementScoreB() }) {
                     Text("+1")
                 }
             }
         }
 
-        Button(onClick = {
-            scoreA = 0
-            scoreB = 0
-        }) {
+        Button(onClick = { viewModel.resetMatch() }) {
             Text("Reiniciar partida")
         }
     }
